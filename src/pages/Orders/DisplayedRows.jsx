@@ -9,6 +9,8 @@ function DisplayedRows({ ordersData }) {
           return (
             <tr key={index}>
               <td style={{ color: "gray" }}>{order._id}</td>
+              <td>{order.name}</td>
+              <td style={{ color: "gray" }}>{order.phone}</td>
               <td>{order.transactions.length}</td>
               <td>${order.total}</td>
               <td>

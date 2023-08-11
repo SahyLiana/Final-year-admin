@@ -40,16 +40,38 @@
       }
     }
   }
-  .details {
+  .details-container {
     margin-top: 30px;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif;
-    tbody {
-      tr {
-        td {
-          padding: 2px 0;
-          span {
-            color: gray;
+    display: flex;
+    justify-content: space-between;
+    .details {
+      // margin-top: 30px;
+      // font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      //   sans-serif;
+      tbody {
+        tr {
+          td {
+            padding: 2px 0;
+            span {
+              color: gray;
+            }
+          }
+        }
+      }
+    }
+
+    .right-header {
+      table {
+        tbody {
+          tr {
+            td {
+              span {
+                color: green;
+                font-weight: bold;
+              }
+            }
           }
         }
       }

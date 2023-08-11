@@ -34,8 +34,9 @@ function Orders() {
           }
         );
 
-        // console.log("All orders are:");
-        // console.log(allOrders.data.myEarnings);
+        console.log("All orders are:");
+        console.log(allOrders.data);
+        console.log;
         setMyTotalOrders([...allOrders.data.myEarnings]);
       } catch (error) {
       } finally {
@@ -82,7 +83,9 @@ function Orders() {
         <thead>
           <tr>
             <th>TransactionID</th>
-            <th>Type of Products</th>
+            <th>Client</th>
+            <th style={{ width: "200px" }}>Contact</th>
+            <th style={{ width: "150px" }}>Type of Products</th>
             <th>Paid</th>
             <th>Status</th>
             <th>Date</th>

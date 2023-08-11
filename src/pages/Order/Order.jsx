@@ -99,28 +99,55 @@ function Order() {
           </div>
         )}
       </div>
-      <table className="details">
-        <tbody>
-          <tr>
-            <td> Transaction ID:</td>
-            <td>
-              <span>{singleOrder._id}</span>
-            </td>
-          </tr>
-          <tr>
-            <td> Date:</td>
-            <td>
-              <span>{singleOrder.date}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>Status:</td>
-            <td>
-              <span>{singleOrder.status}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="details-container">
+        <table className="details">
+          <tbody>
+            <tr>
+              <td> Transaction ID:</td>
+              <td>
+                <span>{singleOrder._id}</span>
+              </td>
+            </tr>
+            <tr>
+              <td> Date:</td>
+              <td>
+                <span>{singleOrder.date}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Status:</td>
+              <td>
+                <span>{singleOrder.status}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="right-header">
+          <table>
+            <tbody>
+              <tr>
+                <td>Client name:</td>
+                <td>
+                  <span>{singleOrder.name}</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Contact:</td>
+                <td>
+                  <span>{singleOrder.phone}</span>
+                </td>
+              </tr>
+              <tr>
+                {" "}
+                <td>Address:</td>
+                <td>
+                  <span>{singleOrder.address}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       {!loading ? (
         <>
