@@ -1,0 +1,142 @@
+.order-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 20px;
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      margin: 0;
+      color: royalblue;
+    }
+
+    .right-header {
+      display: flex;
+      gap: 10px;
+
+      button {
+        background-color: royalblue;
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+        border: none;
+        padding: 0 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          background-color: blue;
+        }
+        &.loading {
+          background-color: gray;
+          cursor: not-allowed;
+        }
+      }
+      select {
+        padding: 10px;
+        font-size: 15px;
+        border: 0.5px solid gainsboro;
+      }
+    }
+  }
+  .details {
+    margin-top: 30px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    tbody {
+      tr {
+        td {
+          padding: 2px 0;
+          span {
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+
+  .transactions {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    text-align: left;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    thead {
+      tr {
+        border-bottom: 0.5px solid gainsboro;
+        td {
+          padding: 10px 0;
+          color: gray;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 0.5px solid gainsboro;
+        td {
+          font-size: 18px;
+          padding: 6px 0;
+        }
+        .product {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          span {
+            width: fit-content;
+            color: blue;
+          }
+          img {
+            width: 70px;
+          }
+        }
+      }
+    }
+  }
+  .calculate-total {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+
+    table {
+      border-collapse: collapse;
+      tbody {
+        tr {
+          td {
+            padding: 6px 0;
+          }
+          .right {
+            text-align: right;
+            font-weight: bold;
+            &.total {
+              font-size: 25px;
+            }
+          }
+          .left {
+            width: 200px;
+            color: gray;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  .payment {
+    text-align: right;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    h4 {
+      background-color: rgba(173, 255, 47, 0.4);
+      width: fit-content;
+      padding: 5px 10px;
+      color: green;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  }
+}
