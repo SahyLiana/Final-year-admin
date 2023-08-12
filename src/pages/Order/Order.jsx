@@ -2,7 +2,9 @@ import React from "react";
 import "./order.scss";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import { useReactToPrint } from "react-to-print";
 import { useSnackbar, enqueueSnackbar } from "notistack";
+import { FaSave } from "react-icons/Fa";
 
 function Order() {
   const { id } = useParams();
@@ -78,25 +80,36 @@ function Order() {
     }
   };
 
+  const componentRef = React.useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: "Order details",
+  });
+
   return (
-    <div className="order-container">
+    <div className="order-container" ref={componentRef}>
       <div className="order-header">
         <h1>Order details</h1>
+        <button className="save" onClick={() => handlePrint()}>
+          <FaSave /> Save
+        </button>
         {singleOrder.status === "Pending" && (
-          <div className="right-header">
-            <button
-              className={` ${updateLoading && "loading"}`}
-              onClick={handleSubmit}
-            >
-              {updateLoading ? "Updating..." : "Update"}
-            </button>
-            <select onChange={(e) => setStatus(e.target.value)} name="status">
-              <option defaultValue="" value="">
-                Change Status
-              </option>
-              <option value="Delivered">Deliver</option>
-            </select>
-          </div>
+          <>
+            <div className="right-header">
+              <button
+                className={` ${updateLoading && "loading"}`}
+                onClick={handleSubmit}
+              >
+                {updateLoading ? "Updating..." : "Update"}
+              </button>
+              <select onChange={(e) => setStatus(e.target.value)} name="status">
+                <option defaultValue="" value="">
+                  Change Status
+                </option>
+                <option value="Delivered">Deliver</option>
+              </select>
+            </div>
+          </>
         )}
       </div>
       <div className="details-container">
