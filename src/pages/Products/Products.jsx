@@ -1,10 +1,11 @@
 import React from "react";
 import "./products.scss";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
-import { Link, useSearchParams } from "react-router-dom";
+// import {  } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 import ProductList from "./ProductList";
 import Pagination from "./Pagination";
+// import { BsSearch } from "react-icons/bs";
 
 function Products() {
   let { category } = useParams();
@@ -14,6 +15,7 @@ function Products() {
   const [postsPerPage, setPostsPerPage] = React.useState(8);
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedFilter, setSelectedFilter] = React.useState({ sorting: "" });
+  const [searchFilter, setSearchFilter] = React.useState("");
   //const [displayedProduct,setDisplayedProduct]=React.useState([])
 
   const handleChange = (e) => {
@@ -24,6 +26,10 @@ function Products() {
       params.set(name, value);
       return params;
     });
+  };
+
+  const handleChangeFilter = (e) => {
+    setSearchFilter(e.target.value);
   };
 
   //  const displayedProduct=products.filter(product=>product._id)
@@ -61,7 +67,18 @@ function Products() {
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentPosts = products.slice(firstPostIndex, lastPostIndex);
+  // const currentPosts = products.slice(firstPostIndex, lastPostIndex);
+  let currentPosts = [];
+
+  if (searchFilter.length > 0) {
+    currentPosts = products
+      .filter((product) => {
+        return product.name.toLowerCase().match(searchFilter.toLowerCase());
+      })
+      .slice(firstPostIndex, lastPostIndex);
+  } else {
+    currentPosts = products.slice(firstPostIndex, lastPostIndex);
+  }
 
   return (
     <div className="products-container">
@@ -76,6 +93,15 @@ function Products() {
             <option value="name">Sort by name:A to Z</option>
             <option value="-name">Sort by name:Z to A</option>
           </select>
+          <div className="search-container">
+            <input
+              onChange={handleChangeFilter}
+              placeholder="Search name..."
+              type="text"
+            />
+            {/* <BsSearch /> */}
+          </div>
+
           <Link className="create" to="/create">
             + Create New
           </Link>
@@ -104,7 +130,9 @@ function Products() {
       </div>
       <div className="pagination">
         <Pagination
-          totalPosts={products.length}
+          totalPosts={
+            searchFilter.length ? currentPosts.length : products.length
+          }
           postsPerPage={postsPerPage}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}

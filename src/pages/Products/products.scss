@@ -19,7 +19,34 @@
         padding: 10px;
         font-size: 15px;
         border: 0.5px solid gainsboro;
+        margin-right: auto;
       }
+      .search-container {
+        display: flex;
+        // align-items: stretch;
+        height: 25px;
+        align-items: center;
+        margin-right: 10px;
+        width: 200px;
+        box-sizing: border-box;
+
+        // border: 1px solid black;
+        input {
+          // box-sizing: border-box;
+          display: block;
+          height: 100%;
+          width: 100%;
+          border: 0.5px gainsboro solid;
+          border-radius: 5px;
+          font-size: 17px;
+          padding: 5px 2px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
       .create {
         text-decoration: none;
         background-color: royalblue;
