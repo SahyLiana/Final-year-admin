@@ -11,6 +11,7 @@ import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Chart from "react-apexcharts";
 
 function Home() {
   const [products, setProducts] = React.useState([]);
@@ -212,30 +213,102 @@ function Home() {
         // setMyTotalEarnings([...allEarnings.data.myTotalEarnings]);
 
         setOrderData({
-          labels: productCategory.map((data) => data.category),
-          datasets: [
-            {
-              label: "Orders",
-              data: productCategory.map((data) => data.numbers),
+          series: productCategory.map((data) => data.numbers),
+          options: {
+            chart: {
+              width: 380,
+              type: "pie",
             },
-          ],
+            title: {
+              text: "Orders",
+              floating: true,
+              offsetY: 0,
+              offsetX: -60,
+              align: "center",
+              style: {
+                color: "#444",
+              },
+            },
+            labels: productCategory.map((data) => data.category),
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  chart: {
+                    width: 200,
+                  },
+                  legend: {
+                    position: "bottom",
+                  },
+                },
+              },
+            ],
+          },
         });
 
+        // setDailyTransactions({
+        //   labels: arrayObject.slice(0, 5).map((data) => data),
+        //   datasets: [
+        //     {
+        //       label: "Last five days transactions",
+        //       data: value.slice(0, 5).map((data) => data),
+        //       backgroundColor: [
+        //         "rgba(75,192,192,1)",
+        //         "#ecf0f1",
+        //         "#50AF95",
+        //         "#f3ba2f",
+        //         "#2a71d0",
+        //       ],
+        //       borderColor: "black",
+        //       borderWidth: 2,
+        //     },
+        //   ],
+        // });
+
         setDailyTransactions({
-          labels: arrayObject.slice(0, 5).map((data) => data),
-          datasets: [
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 10,
+                dataLabels: {
+                  position: "center",
+                },
+                colors: {
+                  ranges: [
+                    {
+                      from: 0,
+                      to: 0,
+                      color: undefined,
+                    },
+                  ],
+                  // backgroundBarColors: ["#111111,#000000"],
+                  backgroundBarOpacity: 1,
+                  backgroundBarRadius: 0,
+                },
+              },
+            },
+            chart: {
+              height: 100,
+            },
+            xaxis: {
+              categories: arrayObject.slice(0, 5).map((data) => data),
+              // categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+            },
+            title: {
+              text: "Last five days transactions",
+              floating: true,
+              offsetY: 0,
+              align: "center",
+              style: {
+                color: "#444",
+              },
+            },
+          },
+          series: [
             {
-              label: "Last five days transactions",
+              name: "Orders",
+              // data: [30, 40, 45, 50, 49, 60, 70, 91],
               data: value.slice(0, 5).map((data) => data),
-              backgroundColor: [
-                "rgba(75,192,192,1)",
-                "#ecf0f1",
-                "#50AF95",
-                "#f3ba2f",
-                "#2a71d0",
-              ],
-              borderColor: "black",
-              borderWidth: 2,
             },
           ],
         });
@@ -285,11 +358,23 @@ function Home() {
         <div className="graph">
           <div className="graph-container">
             <div className="pie-chart">
-              <PieChart chartData={orderData} />
+              {/* <PieChart chartData={orderData} /> */}
+              <Chart
+                type="pie"
+                options={orderData.options}
+                series={orderData.series}
+                height={400}
+              />
               {/* <p style={{ textAlign: "center" }}>Ordered product's graph</p> */}
             </div>
             <div className="bar-chart">
-              <BarChart chartData={dailyTransactions} />
+              {/* <BarChart chartData={dailyTransactions} /> */}
+              <Chart
+                height={400}
+                options={dailyTransactions.options}
+                series={dailyTransactions.series}
+                type="bar"
+              />
               {/* <LineChart chartData={dailyTransactions} /> */}
             </div>
           </div>
