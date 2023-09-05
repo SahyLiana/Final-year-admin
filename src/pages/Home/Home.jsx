@@ -418,7 +418,7 @@ function Home() {
                 return (
                   <tr key={earning._id}>
                     <td style={{ maxWidth: "100px", color: "gray" }}>
-                      {earning._id}
+                      {earning.transactionID}
                     </td>
                     {/* <td>{earning.tran}</td> */}
                     <td>{earning.transactions.length}</td>

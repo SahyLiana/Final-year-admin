@@ -118,7 +118,7 @@ function Order() {
             <tr>
               <td> Transaction ID:</td>
               <td>
-                <span>{singleOrder._id}</span>
+                <span>{singleOrder.transactionID}</span>
               </td>
             </tr>
             <tr>

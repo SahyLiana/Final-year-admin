@@ -8,7 +8,7 @@ function DisplayedRows({ ordersData }) {
         ordersData.map((order, index) => {
           return (
             <tr key={index}>
-              <td style={{ color: "gray" }}>{order._id}</td>
+              <td style={{ color: "gray" }}>{order.transactionID}</td>
               <td>{order.name}</td>
               <td style={{ color: "gray" }}>{order.phone}</td>
               <td>{order.transactions.length}</td>
