@@ -27,7 +27,7 @@ function DisplayedRows({ ordersData }) {
         <tr style={{ border: "none" }}>
           <td>
             <span style={{ fontWeight: "bold", fontSize: "40px" }}>
-              No Orders
+              No Orders...
             </span>
           </td>
         </tr>
