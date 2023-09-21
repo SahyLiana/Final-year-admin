@@ -54,7 +54,7 @@
           font-size: 15px;
         }
 
-        button {
+        .btn {
           margin-top: 15px;
           background-color: royalblue;
           border: none;
@@ -74,11 +74,15 @@
           }
         }
 
-        a {
+        .forget-btn {
           text-decoration: none;
           color: royalblue;
           text-align: right;
           margin-top: 10px;
+          background-color: transparent;
+          border: none;
+          font-weight: bold;
+          cursor: pointer;
           &:hover {
             text-decoration: underline;
           }

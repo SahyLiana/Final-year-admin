@@ -130,7 +130,10 @@ function Orders() {
         </tbody>
       </table>
       <Pagination
-        totalPosts={myTotalOrders.length}
+        // totalPosts={myTotalOrders.length}
+        totalPosts={
+          searchFilter.length ? currentPosts.length : myTotalOrders.length
+        }
         postsPerPage={postsPerPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}

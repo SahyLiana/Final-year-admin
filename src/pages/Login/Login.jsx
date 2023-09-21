@@ -11,12 +11,15 @@ function Login() {
   // const [errorMsg, setErrorMsg] = React.useState(null);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [loading, setLoading] = React.useState(false);
+  const [showNewPassword, setShowNewPassword] = React.useState(false);
   //const [username, setUsername] = React.useState("");
   //const [password, setPassword] = React.useState("");
   const [credentials, setCredentials] = React.useState({
     username: "",
     password: "",
   });
+
+  const [showForgetForm, setShowForgetForm] = React.useState(false);
   //const [noCredentials, setNoCredentials] = React.useState(true);
 
   const handleChange = (e) => {
@@ -42,35 +45,90 @@ function Login() {
     //   password: password,
     // }));
     console.log(credentials);
-    try {
-      setLoading(true);
-      const submitCredentials = await Axios.post(
-        "http://localhost:5000/api/admin",
-        {
-          username: credentials.username,
-          password: credentials.password,
-        }
-      );
-      enqueueSnackbar("Logged in successfuly", {
-        variant: "success",
-      });
-      //   console.log(submitCredentials.data.token);
-      localStorage.setItem("token", `Bearer ${submitCredentials.data.token}`);
 
-      // setErrorMsg(null);
+    if (showForgetForm) {
+      console.log("Forget form");
+      console.log(credentials);
+      try {
+        setLoading(true);
+        const forgetPassword = await Axios.patch(
+          `http://localhost:5000/api/admin/update/forgot_password/${credentials.username}`
+        );
+        enqueueSnackbar("Your password has been renewed successfuly.", {
+          variant: "success",
+        });
+        setShowNewPassword(true);
+      } catch (error) {
+        // console.log(error.response.data.msg);
+        // setErrorMsg((prevError) => error.response.data.msg);
+        // console.log(error.response.data.msg);
+        // enqueueSnackbar("Failed", { variant: "error" });
+        enqueueSnackbar(error.response.data.msg, {
+          variant: "error",
+        });
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      try {
+        setLoading(true);
+        const submitCredentials = await Axios.post(
+          "http://localhost:5000/api/admin",
+          {
+            username: credentials.username,
+            password: credentials.password,
+          }
+        );
+        enqueueSnackbar("Logged in successfuly", {
+          variant: "success",
+        });
+        //   console.log(submitCredentials.data.token);
+        localStorage.setItem("token", `Bearer ${submitCredentials.data.token}`);
 
-      navigate("/");
-    } catch (error) {
-      // console.log(error.response.data.msg);
-      // setErrorMsg((prevError) => error.response.data.msg);
-      // console.log(error.response.data.msg);
-      // enqueueSnackbar("Failed", { variant: "error" });
-      enqueueSnackbar(error.response.data.msg, {
-        variant: "error",
-      });
-    } finally {
-      setLoading(false);
+        // setErrorMsg(null);
+
+        navigate("/");
+      } catch (error) {
+        // console.log(error.response.data.msg);
+        // setErrorMsg((prevError) => error.response.data.msg);
+        // console.log(error.response.data.msg);
+        // enqueueSnackbar("Failed", { variant: "error" });
+        enqueueSnackbar(error.response.data.msg, {
+          variant: "error",
+        });
+      } finally {
+        setLoading(false);
+      }
     }
+    // try {
+    //   setLoading(true);
+    //   const submitCredentials = await Axios.post(
+    //     "http://localhost:5000/api/admin",
+    //     {
+    //       username: credentials.username,
+    //       password: credentials.password,
+    //     }
+    //   );
+    //   enqueueSnackbar("Logged in successfuly", {
+    //     variant: "success",
+    //   });
+    //   //   console.log(submitCredentials.data.token);
+    //   localStorage.setItem("token", `Bearer ${submitCredentials.data.token}`);
+
+    //   // setErrorMsg(null);
+
+    //   navigate("/");
+    // } catch (error) {
+    //   // console.log(error.response.data.msg);
+    //   // setErrorMsg((prevError) => error.response.data.msg);
+    //   // console.log(error.response.data.msg);
+    //   // enqueueSnackbar("Failed", { variant: "error" });
+    //   enqueueSnackbar(error.response.data.msg, {
+    //     variant: "error",
+    //   });
+    // } finally {
+    //   setLoading(false);
+    // }
     // finally {
     //   setNoCredentials(true);
     // }
@@ -90,7 +148,7 @@ function Login() {
           }}
           className="left-image"
         >
-          <h1>POWERED BY RAST</h1>
+          <h1>POWERED BY ARAST</h1>
         </div>
         <div className="right-content">
           <div className="form-content">
@@ -128,20 +186,47 @@ function Login() {
             />
             <br />
             {/* <label htmlFor="password">Password:</label> */}
-            <input
+            {!showForgetForm && (
+              <input
+                // onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
+                placeholder="Password"
+                type="password"
+                id="password"
+                name="password"
+              />
+            )}
+            {/* <input
               // onChange={(e) => setPassword(e.target.value)}
               onChange={handleChange}
               placeholder="Password"
               type="password"
               id="password"
               name="password"
-            />
+            /> */}
 
-            <Link>Forgot password?</Link>
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                setShowForgetForm((prev) => !prev);
+              }}
+              className="forget-btn"
+            >
+              {showForgetForm ? "Sign in" : "Forget password?"}
+            </Link>
 
-            <button className={`${loading && "loading"}`}>
-              {loading ? "Please wait..." : "Sign in"}
+            <button className={`btn ${loading && "loading"}`}>
+              {loading
+                ? "Please wait..."
+                : showForgetForm
+                ? "Get New Password"
+                : "Sign in"}
             </button>
+            {showNewPassword && (
+              <p style={{ color: "green", fontSize: "20px" }}>
+                Your new password is 123
+              </p>
+            )}
             {/* {!noCredentials ? <p>Please provide credentials</p> : null} */}
             {/* {errorMsg && <p>{errorMsg}</p>} */}
           </div>
