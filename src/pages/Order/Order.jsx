@@ -69,7 +69,9 @@ function Order() {
         // setStatus(order.data.findOrder.status);
         setStatus(status);
         setSingleOrder((prev) => ({ ...prev, status: status }));
-        enqueueSnackbar("Order has been delivered", { variant: "success" });
+        enqueueSnackbar("Order has been cancelled successfuly", {
+          variant: "success",
+        });
       } catch (error) {
         enqueueSnackbar("Something went wrong", { variant: "error" });
       } finally {
@@ -107,6 +109,7 @@ function Order() {
                   Change Status
                 </option>
                 <option value="Delivered">Deliver</option>
+                <option value="Cancelled">Cancel</option>
               </select>
             </div>
           </>
@@ -218,7 +221,11 @@ function Order() {
             </table>
           </div>
           <div className="payment">
-            <h4>Payment made</h4>
+            <h4>
+              {singleOrder.status === "Cancelled"
+                ? "Payment cancelled"
+                : "Payment made"}
+            </h4>
           </div>
         </>
       ) : (

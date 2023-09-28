@@ -1,14 +1,14 @@
 import React from "react";
 import "./home.scss";
-import PieChart from "./PieChart";
+// import PieChart from "./PieChart";
 import Card from "./Card";
 import { AiOutlineDollar } from "react-icons/Ai";
 import { MdProductionQuantityLimits } from "react-icons/Md";
 import { TbCubeSend } from "react-icons/Tb";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import BarChart from "./BarChart";
-import LineChart from "./LineChart";
+// import BarChart from "./BarChart";
+// import LineChart from "./LineChart";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Chart from "react-apexcharts";
@@ -105,14 +105,18 @@ function Home() {
         for (let i = 0; i < AllEarnings.length; i++) {
           // transactions.push(AllEarnings[i].transactions);
           // console.log(AllEarnings[i].transactions);
-          for (let j = 0; j < AllEarnings[i].transactions.length; j++) {
-            console.log(AllEarnings[i].transactions[j]);
-            transactions.push(AllEarnings[i].transactions[j]);
+          if (AllEarnings[i].status !== "Cancelled") {
+            for (let j = 0; j < AllEarnings[i].transactions.length; j++) {
+              console.log(AllEarnings[i].transactions[j]);
+              transactions.push(AllEarnings[i].transactions[j]);
+            }
           }
         }
 
         console.log("Only transactions");
         console.log(transactions);
+        console.log("All earnings areeee");
+        console.log(AllEarnings);
 
         for (let i = 0; i < productCategory.length; i++) {
           // console.log(transactions[i].category);//Computers
@@ -131,19 +135,40 @@ function Home() {
           // console.log(productCategory);
         }
 
+        // for (let i = 0; i < productCategory.length; i++) {
+        //   // console.log(transactions[i].category);//Computers
+        //   for (let j = 0; j < transactions.length; j++) {
+        //     if (transactions[j].category === productCategory[i].category) {
+        //       productCategory[i].numbers += transactions[j].nb;
+        //       console.log("Inside the if");
+        //       console.log(transactions[j].category);
+        //       console.log(productCategory[i].numbers);
+        //     }
+        //     console.log(productCategory[i].category);
+        //     console.log("Outside the if");
+        //     console.log(productCategory[i].numbers);
+        //   }
+        //   // console.log(productCategory);
+        // }
+
         const earningsData = totalEarnings.data.myEarnings;
         const checkEarningData = totalEarnings.data.myEarnings;
         const earningsArray = [];
+        console.log("My earnings Data");
+        console.log(earningsData);
 
         for (let i = 0; i < earningsData.length; i++) {
           //if (earningsArray.length === 0) {
-          earningsArray.push({
-            date: earningsData[i].date.slice(
-              0,
-              earningsData[i].date.indexOf("a")
-            ),
-            // date: earningsData[i].date,
-          });
+          if (earningsData[i].status !== "Cancelled") {
+            earningsArray.push({
+              date: earningsData[i].date.slice(
+                0,
+                earningsData[i].date.indexOf("a")
+              ),
+              // date: earningsData[i].date,
+            });
+          }
+
           //}
 
           //     for (let j = 0; j < checkEarningData.length; j++) {
@@ -156,7 +181,9 @@ function Home() {
         const elementCounts = {};
 
         earningsArray.forEach((element) => {
+          // if (element.status !== "Canceled") {
           elementCounts[element.date] = (elementCounts[element.date] || 0) + 1;
+          // }
         });
 
         console.log("My earning array is");
@@ -315,16 +342,27 @@ function Home() {
 
         const arrayEarnings = [...totalEarnings.data.myTotalEarnings];
         console.log("The number of orders are:");
+
         console.log(totalEarnings.data.nbHits);
+        console.log("Product pending and delived");
+        const arrayOrder = arrayEarnings.filter(
+          (earning) => earning.status !== "Cancelled"
+        );
+        console.log(arrayOrder.length);
+        console.log(arrayEarnings);
         // const earnings = allEarnings.data.myEarnings;
 
         let myTotal = 0;
         arrayEarnings.map((earning) => {
-          myTotal += earning.total;
+          if (earning.status !== "Cancelled") {
+            myTotal += earning.total;
+          }
         });
+
         setTotal(myTotal);
 
         setOrderNumber(totalEarnings.data.nbHits);
+        setOrderNumber(arrayOrder.length);
       } catch (error) {
         console.log(error);
       } finally {
