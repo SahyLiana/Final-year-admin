@@ -5,6 +5,8 @@ import Axios from "axios";
 import { useReactToPrint } from "react-to-print";
 import { useSnackbar, enqueueSnackbar } from "notistack";
 import { FaSave } from "react-icons/Fa";
+import BarCode from "react-barcode";
+import QRCode from "react-qr-code";
 
 function Order() {
   const { id } = useParams();
@@ -154,7 +156,6 @@ function Order() {
                 </td>
               </tr>
               <tr>
-                {" "}
                 <td>Address:</td>
                 <td>
                   <span>{singleOrder.address}</span>
@@ -203,6 +204,14 @@ function Order() {
             </tbody>
           </table>
           <div className="calculate-total">
+            <div className="code">
+              {singleOrder.transactionID && (
+                <QRCode
+                  style={{ height: "100px", width: "100px" }}
+                  value={singleOrder.transactionID}
+                />
+              )}
+            </div>
             <table>
               <tbody>
                 <tr>
@@ -226,6 +235,16 @@ function Order() {
                 ? "Payment cancelled"
                 : "Payment made"}
             </h4>
+          </div>
+          <div className="barcode">
+            <BarCode
+              width="1"
+              background="white"
+              height="30px"
+              className="barcode"
+              value={singleOrder.transactionID}
+              fontSize="12px"
+            />
           </div>
         </>
       ) : (

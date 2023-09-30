@@ -138,8 +138,12 @@
     }
   }
   .calculate-total {
+    .code {
+      max-height: 100px;
+    }
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif;
@@ -180,5 +184,14 @@
       border-radius: 10px;
       margin-top: 10px;
     }
+  }
+  .barcode {
+    max-width: 100%;
+    // margin: 0 auto;
+    overflow: hidden;
+    // display: none;
+    // @media print {
+    //   display: block;
+    // }
   }
 }
