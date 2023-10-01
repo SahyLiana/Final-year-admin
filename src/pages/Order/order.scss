@@ -189,9 +189,22 @@
     max-width: 100%;
     // margin: 0 auto;
     overflow: hidden;
-    // display: none;
-    // @media print {
-    //   display: block;
-    // }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      display: block;
+      background-color: black;
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      transition: all 0.4s;
+      &:hover {
+        border-radius: 6px;
+      }
+      @media print {
+        display: none;
+      }
+    }
   }
 }

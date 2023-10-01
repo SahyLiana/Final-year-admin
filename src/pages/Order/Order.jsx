@@ -1,6 +1,6 @@
 import React from "react";
 import "./order.scss";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
 import { useReactToPrint } from "react-to-print";
 import { useSnackbar, enqueueSnackbar } from "notistack";
@@ -97,7 +97,7 @@ function Order() {
         <button className="save" onClick={() => handlePrint()}>
           <FaSave /> Save
         </button>
-        {singleOrder.status === "Pending" && (
+        {singleOrder.status !== "Cancelled" && (
           <>
             <div className="right-header">
               <button
@@ -245,6 +245,7 @@ function Order() {
               value={singleOrder.transactionID}
               fontSize="12px"
             />
+            <Link to="/orders">Back</Link>
           </div>
         </>
       ) : (
