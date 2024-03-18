@@ -179,7 +179,7 @@ function Login() {
             <input
               // onChange={(e) => setUsername(e.target.value)}
               onChange={handleChange}
-              placeholder="E-mail address"
+              placeholder="Username"
               type="text"
               id="username"
               name="username"

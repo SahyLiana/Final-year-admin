@@ -50,21 +50,21 @@ function Card({ product, products, setProducts }) {
             <span className="oldPrice">${product.oldPrice}</span>
           )}
         </p>
-        <div className="product-footer">
-          <Link to={`/product/${product._id}`} className="btn">
-            <span className="icons">
-              <FiEdit2 />
-            </span>
-            Edit
-          </Link>
-          <button onClick={() => deleteProduct()} className="btn delete">
-            <span className="icons">
-              <AiTwotoneDelete />
-            </span>
-            Delete
-          </button>
-        </div>
       </Link>
+      <div className="product-footer">
+        <Link to={`/product/${product._id}`} className="btn">
+          <span className="icons">
+            <FiEdit2 />
+          </span>
+          Edit
+        </Link>
+        <button onClick={() => deleteProduct()} className="btn delete">
+          <span className="icons">
+            <AiTwotoneDelete />
+          </span>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

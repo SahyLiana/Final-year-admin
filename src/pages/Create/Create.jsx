@@ -45,7 +45,7 @@ function Create() {
       formData.append("description", product.description);
       formData.append("featured", product.featured);
       formData.append("image", product.image);
-      formData.append("oldPrice", product.price);
+      formData.append("oldPrice", product.oldPrice);
       formData.append("price", product.price);
       formData.append("quantity", product.quantity);
 

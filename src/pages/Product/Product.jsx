@@ -51,6 +51,7 @@ function Product() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Submitted");
+    console.log(product);
 
     if (product.featured === true && product.oldPrice === 0) {
       enqueueSnackbar("A featured product should have an old price...", {

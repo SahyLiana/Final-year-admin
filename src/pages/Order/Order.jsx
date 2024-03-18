@@ -208,7 +208,12 @@ function Order() {
               {singleOrder.transactionID && (
                 <QRCode
                   style={{ height: "100px", width: "100px" }}
-                  value={singleOrder.transactionID}
+                  value={`ID:${singleOrder.transactionID}
+                  NAME:${singleOrder.name} 
+                  CONTACT:${singleOrder.phone}
+                  ADDRESS:${singleOrder.address}
+                  TOTAL:${singleOrder.total}
+                  TIME:${singleOrder.date}`}
                 />
               )}
             </div>
